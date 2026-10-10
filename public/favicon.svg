@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="routerGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFDF70"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#996515"/>
+    </linearGradient>
+    <linearGradient id="routerGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0A0D12"/>
+  <circle cx="32" cy="32" r="28" stroke="url(#routerGold)" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 32 10 L 52 26 L 52 46 L 32 54 L 12 46 L 12 26 Z" fill="none" stroke="url(#routerGold)" stroke-width="2"/>
+  <!-- Central Router Core -->
+  <circle cx="32" cy="32" r="7" fill="url(#routerGold)"/>
+  <!-- Hub nodes -->
+  <circle cx="32" cy="18" r="3.5" fill="#10B981"/>
+  <circle cx="46" cy="38" r="3.5" fill="#3B82F6"/>
+  <circle cx="18" cy="38" r="3.5" fill="#F59E0B"/>
+  <!-- Connecting routing lines -->
+  <line x1="32" y1="32" x2="32" y2="18" stroke="#10B981" stroke-width="1.5" stroke-dasharray="2 2"/>
+  <line x1="32" y1="32" x2="46" y2="38" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="2 2"/>
+  <line x1="32" y1="32" x2="18" y2="38" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="2 2"/>
+</svg>

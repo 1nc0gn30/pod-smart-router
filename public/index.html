@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POD Smart Router — Multi-Channel Print-on-Demand Routing (Printify vs Gelato)</title>
+  <meta name="description" content="Autonomous multi-channel Print-on-Demand order router. Dynamically route orders between Printify and Gelato based on landed cost, local factory proximity, delivery days, and customs elimination.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://pod-smart-router.nullai.tech/">
+
+  <!-- Social & OpenGraph Meta Tags -->
+  <meta property="og:title" content="POD Smart Router — Autonomous POD Fulfillment Optimization">
+  <meta property="og:description" content="Multi-channel routing engine that compares landed wholesale costs, shipping, and customs tariffs between Printify and Gelato in real-time.">
+  <meta property="og:url" content="https://pod-smart-router.nullai.tech/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pod-smart-router.nullai.tech/favicon.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@1nc0gn30">
+  <meta name="twitter:creator" content="@1nc0gn30">
+  <meta name="twitter:title" content="POD Smart Router — Printify vs Gelato">
+  <meta name="twitter:description" content="Save 20-45% per order and eliminate international customs tariffs with autonomous print-on-demand smart routing.">
+  <meta name="twitter:image" content="https://pod-smart-router.nullai.tech/favicon.svg">
+
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Schema.org JSON-LD Graph for Googlebot & Perplexity AI Discovery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "POD Smart Router",
+        "url": "https://pod-smart-router.nullai.tech/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "creator": {
+          "@type": "Person",
+          "name": "Neal Frazier",
+          "url": "https://nealfrazier.tech"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "19.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://buy.stripe.com/7sI7sA8hM2X8eFG8ww"
+        },
+        "description": "Autonomous multi-channel Print-on-Demand order router comparing Printify and Gelato on landed cost, local factory proximity, delivery speed, and customs duties."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does POD Smart Router save money on print-on-demand orders?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "POD Smart Router calculates total landed costs across Printify and Gelato including base manufacturing cost, shipping zones, and cross-border import VAT/brokerage tariffs. It autonomously dispatches each order to whichever domestic print lab eliminates tariffs and offers the lowest landed price."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this work with my existing Etsy and Shopify stores?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. POD Smart Router generates validated API dispatch payloads formatted directly for the Printify Order API v1 and Gelato Order API v2. It can be integrated into Shopify webhooks, Etsy sync pipelines, or executed via CLI."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Lifetime Founding Member license?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A one-time payment of $19 grants perpetual commercial access to the routing engine, CLI tool, MCP agent tools, and unlimited client-side dispatch generation with zero recurring monthly fees."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <img src="/favicon.svg" alt="POD Smart Router Logo" width="32" height="32" class="brand-logo">
+        <span class="brand-title">POD Smart Router</span>
+        <span class="brand-badge badge-free">v1.0 • COMMUNITY</span>
+        <span class="brand-badge badge-pro">⭐ PRO ACTIVE</span>
+      </div>
+      <div class="header-actions">
+        <a href="#simulator" class="btn btn-secondary btn-sm">Simulator</a>
+        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Get Pro ($19)</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Above-The-Fold Sales Funnel Banner -->
+    <div class="sales-banner-wrapper">
+      <div class="sales-banner">
+        <div class="banner-left">
+          <div class="banner-eyebrow">
+            <span class="pulse-dot"></span>
+            FOUNDING MERCHANTS SPECIAL • 76% OFF
+          </div>
+          <h2 class="banner-title">Stop Bleeding Margins on International POD Shipping & Tariffs</h2>
+          <p class="banner-desc">
+            Automatically route every order to the optimal domestic print lab between Printify and Gelato. Eliminate cross-border import VAT, shave 4–8 delivery days, and increase net profit by $3.40+ per order.
+          </p>
+        </div>
+        <div class="banner-right">
+          <div class="price-lockup">
+            <span class="price-regular">$79</span>
+            <span class="price-deal">$19</span>
+            <span class="price-sub">/ Lifetime Access</span>
+          </div>
+          <div class="banner-cta-group">
+            <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              Unlock Pro ($19 Lifetime)
+            </a>
+            <button id="btn-depay-solana" class="btn btn-solana" title="Pay with Solana or Crypto">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
+              Pay via Solana
+            </button>
+          </div>
+          <a href="#activate" id="btn-open-license-modal" style="font-size: 0.8rem; color: var(--text-dim); text-decoration: underline; margin-top: 4px;">Already have a license key? Activate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kinetic Hero Section ("The Global Routing Astrolabe") -->
+    <section class="hero-section">
+      <div class="hero-canvas-container">
+        <canvas id="hero-canvas"></canvas>
+      </div>
+      <div class="hero-overlay-content">
+        <h1 class="hero-headline">Autonomous Multi-Channel Order Router</h1>
+        <p class="hero-tagline">Real-time landed cost, domestic hub routing, and tariff elimination across 32 countries.</p>
+      </div>
+    </section>
+
+    <!-- Bento Cockpit Workspace -->
+    <main id="simulator" class="bento-cockpit">
+      <!-- Left Panel: Interactive Simulator Controls -->
+      <section class="control-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Routing Parameters
+          </h2>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="sku-select">Target Product</label>
+          <select id="sku-select" class="select-control">
+            <option value="gildan_18000">Gildan 18000 Heavy Blend Crewneck Sweatshirt</option>
+            <option value="comfort_colors_1717">Comfort Colors 1717 Garment-Dyed Heavyweight Tee</option>
+            <option value="bella_canvas_3001">Bella+Canvas 3001 Unisex Jersey Short Sleeve Tee</option>
+            <option value="ceramic_mug_15oz">White Gloss Ceramic Mug 15oz</option>
+            <option value="canvas_gallery_wrap_16x20">Stretched Canvas Gallery Wrap 16x20 Inch</option>
+            <option value="matte_poster_18x24">Museum-Quality Matte Paper Poster 18x24 Inch</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="country-select">Customer Destination Country</label>
+          <select id="country-select" class="select-control">
+            <option value="US">United States (Domestic Printify & Gelato)</option>
+            <option value="GB">United Kingdom (Local Hubs)</option>
+            <option value="DE">Germany (EU Central Hub)</option>
+            <option value="FR">France (Gelato Domestic Hub)</option>
+            <option value="IT">Italy (Gelato Domestic Hub)</option>
+            <option value="ES">Spain (Gelato Domestic Hub)</option>
+            <option value="CA">Canada (Domestic Printify & Gelato)</option>
+            <option value="AU">Australia (Domestic Printify & Gelato)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="quantity-input">Order Quantity (Units)</label>
+          <input type="number" id="quantity-input" class="input-control" value="1" min="1" max="100">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rule-select">Optimization Strategy</label>
+          <select id="rule-select" class="select-control">
+            <option value="balanced">Balanced Sovereign (Cost + Domestic Hubs)</option>
+            <option value="cheapest">Maximum Margin (Lowest Landed Cost)</option>
+            <option value="fastest">Fast Track (Quickest Door-to-Door Delivery)</option>
+            <option value="customs_avoidance">Zero Customs Tariff Guarantee</option>
+            <option value="domestic_only">100% Domestic Local Print Only</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="toggle-group">
+            <span class="toggle-label">Printify Premium Account (20% Off)</span>
+            <label class="toggle-switch" aria-label="Toggle Printify Premium Discount">
+              <input type="checkbox" id="premium-toggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Side-by-Side Comparison & Recommendation -->
+      <section class="comparison-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="18" x="3" y="3" rx="1"/><rect width="8" height="18" x="13" y="3" rx="1"/></svg>
+            Side-by-Side Landed Cost Matrix
+          </h2>
+        </div>
+
+        <div class="comparison-grid">
+          <!-- Printify Card -->
+          <div id="printify-card" class="partner-card">
+            <div class="winner-ribbon" style="display: none;">⭐ Optimal Route</div>
+            <div class="partner-header">
+              <span class="partner-name">Printify</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Global Network</span>
+            </div>
+            <div class="landed-cost-block">
+              <div class="cost-label">Total Landed Cost</div>
+              <div id="printify-landed-cost" class="cost-value">$14.99</div>
+            </div>
+            <ul class="spec-list">
+              <li class="spec-item">
+                <span>Estimated Delivery</span>
+                <span id="printify-delivery" class="val">6 Days</span>
+              </li>
+              <li class="spec-item">
+                <span>Production Hub</span>
+                <span id="printify-domestic" class="val">Domestic Hub (Yes)</span>
+              </li>
+              <li class="spec-item">
+                <span>Import Tariffs & VAT</span>
+                <span id="printify-customs" class="val">ZERO (Domestic)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Gelato Card -->
+          <div id="gelato-card" class="partner-card">
+            <div class="winner-ribbon" style="display: none;">⭐ Optimal Route</div>
+            <div class="partner-header">
+              <span class="partner-name">Gelato</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">32 Local Hubs</span>
+            </div>
+            <div class="landed-cost-block">
+              <div class="cost-label">Total Landed Cost</div>
+              <div id="gelato-landed-cost" class="cost-value">$16.00</div>
+            </div>
+            <ul class="spec-list">
+              <li class="spec-item">
+                <span>Estimated Delivery</span>
+                <span id="gelato-delivery" class="val">5 Days</span>
+              </li>
+              <li class="spec-item">
+                <span>Production Hub</span>
+                <span id="gelato-domestic" class="val">Domestic Hub (Yes)</span>
+              </li>
+              <li class="spec-item">
+                <span>Import Tariffs & VAT</span>
+                <span id="gelato-customs" class="val">ZERO (Domestic)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Winning Reason & Metrics Summary -->
+        <div class="winner-summary-card">
+          <div class="winner-metric">
+            <span class="metric-label">Margin Advantage</span>
+            <span id="summary-dollar-savings" class="metric-value">$1.01</span>
+          </div>
+          <div class="winner-metric">
+            <span class="metric-label">Transit Accelerated</span>
+            <span id="summary-days-saved" class="metric-value">0 Days</span>
+          </div>
+          <div class="winner-metric">
+            <span class="metric-label">Carbon Miles Saved</span>
+            <span id="summary-carbon-saved" class="metric-value">0 Miles</span>
+          </div>
+        </div>
+        <p id="summary-reason" style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.5; padding: 0 4px;">
+          Printify selected: Lower wholesale base cost with verified domestic manufacturing in target country.
+        </p>
+      </section>
+    </main>
+
+    <!-- Frosted Paywall Blur Output Section -->
+    <section class="output-section">
+      <div class="output-header">
+        <h2 class="panel-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Production API Dispatch Payload
+        </h2>
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-copy-payload" class="btn btn-secondary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copy Payload
+          </button>
+          <button id="btn-download-payload" class="btn btn-secondary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Download JSON
+          </button>
+        </div>
+      </div>
+
+      <div class="code-container">
+        <!-- Paywall Blur applied to pre block until unlocked -->
+        <pre id="code-preview" class="code-preview paywall-blur">Loading dispatch payload...</pre>
+
+        <!-- Paywall Lock Overlay -->
+        <div class="paywall-overlay">
+          <div class="lock-badge">🔒</div>
+          <h3 class="lock-title">Production Order Dispatch Paywall</h3>
+          <p class="lock-desc">
+            Unlock instant exportable API dispatch schemas for Printify and Gelato, automated batch routing, and perpetual Antigravity MCP tools.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary">
+              Unlock Full Access — $19 Lifetime
+            </a>
+            <button id="btn-unlock-paywall" class="btn btn-secondary">
+              Enter License Key
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section for Perplexity & SGE Crawlers -->
+    <section class="faq-section">
+      <h2 style="font-family: 'Syne', sans-serif; font-size: 1.5rem; color: #FFFFFF; margin-bottom: 20px;">Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3>Why use both Printify and Gelato?</h3>
+          <p>Printify offers rock-bottom base costs for US domestic volume through their US print provider network, while Gelato provides 32 localized international production hubs across Europe, Canada, and Australia that eliminate steep cross-border tariffs and customs delays.</p>
+        </div>
+        <div class="faq-card">
+          <h3>How does the 1-click license unlock work?</h3>
+          <p>Upon completing checkout via Stripe or DePay Solana, your browser receives an activation parameter or you can paste your receipt order ID into the activation modal. All payload filters dissolve permanently in your browser via localStorage.</p>
+        </div>
+        <div class="faq-card">
+          <h3>Can I execute this directly from Python or the terminal?</h3>
+          <p>Yes. The repository includes an executable CLI (<code>bin/pod-smart-router</code>), an Antigravity MCP stdio server, and a high-performance HTTP daemon on port 8117.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- High-Converting Pro Paywall Modal -->
+  <div id="paywall-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h2 class="modal-title">Unlock Lifetime Founding Access</h2>
+        <p class="modal-subtitle">One-time payment of $19 • Zero recurring monthly fees • Unlimited order dispatches</p>
+      </div>
+
+      <ul class="benefits-checklist">
+        <li class="benefit-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>100% In-Browser & Local Python CLI Routing Engine</span>
+        </li>
+        <li class="benefit-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Automated Printify & Gelato API v2 Dispatch Payloads</span>
+        </li>
+        <li class="benefit-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Cross-Border Import VAT & Customs Tariff Elimination</span>
+        </li>
+        <li class="benefit-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Antigravity MCP Stdio Server (6 Autonomous Tools)</span>
+        </li>
+        <li class="benefit-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Perpetual updates for all v1.x releases</span>
+        </li>
+      </ul>
+
+      <div class="modal-checkout-buttons">
+        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">
+          Pay with Credit Card / Apple Pay ($19)
+        </a>
+      </div>
+
+      <div class="license-key-activation">
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Already purchased or have an activation key?</p>
+        <div class="license-key-form">
+          <input type="text" id="license-key-input" class="input-control" placeholder="Enter license key or receipt order ID" style="min-height: 40px; font-size: 0.88rem;">
+          <button id="btn-activate-key" class="btn btn-secondary" style="min-height: 40px;">Activate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Professional Footer -->
+  <footer class="app-footer">
+    <p>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener">@1nc0gn30</a>) • <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a></p>
+    <div class="footer-links">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/support.html">Merchant Support</a>
+      <a href="https://github.com/1nc0gn30/pod-smart-router" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+  <script src="/hero_canvas.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
