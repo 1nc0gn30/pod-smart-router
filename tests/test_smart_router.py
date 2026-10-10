@@ -4,7 +4,14 @@
 Zero external test framework dependencies.
 """
 
+import os
+import sys
 import unittest
+
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
+
 from pod_smart_router.catalog_matrix import CATALOG_MATRIX, get_all_products
 from pod_smart_router.router import SmartRouter, RoutingDecision
 from pod_smart_router.payload_gen import DispatchPayloadGenerator
