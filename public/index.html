@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POD Smart Router — Multi-Channel Print-on-Demand Routing (Printify vs Gelato)</title>
   <meta name="description" content="Autonomous multi-channel Print-on-Demand order router. Dynamically route orders between Printify and Gelato based on landed cost, local factory proximity, delivery days, and customs elimination.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icon.png">
+  <link rel="apple-touch-icon" href="/assets/icon.png">
   <link rel="canonical" href="https://pod-smart-router.nullai.tech/">
 
   <!-- Social & OpenGraph Meta Tags -->
@@ -13,15 +16,16 @@
   <meta property="og:description" content="Multi-channel routing engine that compares landed wholesale costs, shipping, and customs tariffs between Printify and Gelato in real-time.">
   <meta property="og:url" content="https://pod-smart-router.nullai.tech/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://pod-smart-router.nullai.tech/favicon.svg">
+  <meta property="og:image" content="https://pod-smart-router.nullai.tech/assets/banner.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@1nc0gn30">
   <meta name="twitter:creator" content="@1nc0gn30">
   <meta name="twitter:title" content="POD Smart Router — Printify vs Gelato">
   <meta name="twitter:description" content="Save 20-45% per order and eliminate international customs tariffs with autonomous print-on-demand smart routing.">
-  <meta name="twitter:image" content="https://pod-smart-router.nullai.tech/favicon.svg">
+  <meta name="twitter:image" content="https://pod-smart-router.nullai.tech/assets/banner.png">
 
   <link rel="stylesheet" href="/style.css">
+  <script src="https://integrate.depay.com/widgets/v13.js" defer></script>
 
   <!-- Schema.org JSON-LD Graph for Googlebot & Perplexity AI Discovery -->
   <script type="application/ld+json">
@@ -88,12 +92,12 @@
   <header class="app-header">
     <div class="header-container">
       <div class="brand-group">
-        <img src="/favicon.svg" alt="POD Smart Router Logo" width="32" height="32" class="brand-logo">
+        <img src="/assets/icon.png" alt="POD Smart Router Logo" width="32" height="32" class="brand-logo">
         <span class="brand-title">POD Smart Router</span>
-        <span class="brand-badge badge-free">v1.0 • COMMUNITY</span>
-        <span class="brand-badge badge-pro">⭐ PRO ACTIVE</span>
+        <span id="pro-badge" class="brand-badge badge-free">FREE TIER</span>
       </div>
       <div class="header-actions">
+        <button id="btn-header-key" class="btn btn-secondary btn-sm">Enter Key</button>
         <a href="#simulator" class="btn btn-secondary btn-sm">Simulator</a>
         <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Get Pro ($19)</a>
       </div>
@@ -125,7 +129,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
               Unlock Pro ($19 Lifetime)
             </a>
-            <button id="btn-depay-solana" class="btn btn-solana" title="Pay with Solana or Crypto">
+            <button id="btn-depay-solana" class="btn btn-solana btn-depay-trigger" data-depay title="Pay with Solana or Crypto">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
               Pay via Solana
             </button>
@@ -330,6 +334,10 @@
             <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary">
               Unlock Full Access — $19 Lifetime
             </a>
+            <button id="btn-depay-paywall" class="btn btn-solana btn-depay-trigger" data-depay>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
+              Pay via Solana
+            </button>
             <button id="btn-unlock-paywall" class="btn btn-secondary">
               Enter License Key
             </button>
@@ -390,18 +398,24 @@
         </li>
       </ul>
 
-      <div class="modal-checkout-buttons">
-        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">
+      <div class="modal-checkout-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+        <a href="https://buy.stripe.com/7sI7sA8hM2X8eFG8ww" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
           Pay with Credit Card / Apple Pay ($19)
         </a>
+        <button id="btn-depay-modal" class="btn btn-solana btn-depay-trigger" data-depay style="width: 100%; justify-content: center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
+          Pay with Solana / Crypto ($19)
+        </button>
       </div>
 
       <div class="license-key-activation">
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Already purchased or have an activation key?</p>
-        <div class="license-key-form">
-          <input type="text" id="license-key-input" class="input-control" placeholder="Enter license key or receipt order ID" style="min-height: 40px; font-size: 0.88rem;">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Already purchased or have an activation key?</p>
+        <div class="license-key-form" style="display: flex; gap: 8px;">
+          <input type="text" id="license-key-input" class="input-control" placeholder="Enter license key or receipt order ID" style="min-height: 40px; font-size: 0.88rem; flex: 1;">
           <button id="btn-activate-key" class="btn btn-secondary" style="min-height: 40px;">Activate</button>
         </div>
+        <div id="license-status" style="font-size: 0.82rem; margin-top: 6px; min-height: 18px;"></div>
       </div>
     </div>
   </div>

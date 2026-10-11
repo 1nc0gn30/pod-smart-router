@@ -97,35 +97,32 @@ html, body {
 }
 
 .brand-badge {
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid var(--border-gold);
-  color: var(--gold-glow);
   font-size: 0.72rem;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 20px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  display: inline-block;
+}
+
+.badge-free {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-dim);
 }
 
 .badge-pro {
   background: rgba(16, 185, 129, 0.2) !important;
-  border-color: rgba(16, 185, 129, 0.5) !important;
+  border: 1px solid rgba(16, 185, 129, 0.5) !important;
   color: #34D399 !important;
-  display: none;
-}
-
-body.licensed .badge-free {
-  display: none;
-}
-body.licensed .badge-pro {
-  display: inline-block;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 /* Conic Border Beam Sales Banner */
@@ -564,9 +561,11 @@ input:checked + .toggle-slider:before {
   font-size: 0.88rem;
   color: #A5B4FC;
   line-height: 1.6;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
   overflow-x: auto;
   max-height: 280px;
+  max-width: 100%;
 }
 
 .paywall-blur {
@@ -693,7 +692,7 @@ body.licensed .paywall-overlay {
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
@@ -703,8 +702,9 @@ body.licensed .paywall-overlay {
 }
 
 .modal-backdrop.is-open {
-  opacity: 1;
-  pointer-events: auto;
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .modal-card {
