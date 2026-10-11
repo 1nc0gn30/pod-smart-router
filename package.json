@@ -1,0 +1,12 @@
+{
+  "name": "pod-smart-router",
+  "version": "2.5.0",
+  "description": "Landed-cost & speed arbitration engine routing print-on-demand orders dynamically between Printify and Gelato with instant profit optimization and Antigravity MCP suite.",
+  "main": "public/app.js",
+  "scripts": {
+    "serve": "python3 -m http.server 8117 --directory public",
+    "test": "pytest tests"
+  },
+  "author": "Neal Frazier Tech (@1nc0gn30)",
+  "license": "MIT"
+}

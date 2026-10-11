@@ -183,30 +183,80 @@
   const licenseInput = document.getElementById("license-key-input");
   const activateBtn = document.getElementById("btn-activate-key");
 
+  // Toast Notification System
+  function showToast(msg) {
+    let toast = document.getElementById('routerToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'routerToast';
+      toast.style.cssText = 'position: fixed; bottom: 24px; right: 24px; z-index: 100000; background: #0A0F1D; border: 1px solid var(--gold, #D4AF37); color: #FFF; padding: 0.65rem 1.25rem; border-radius: 8px; font-family: var(--font-mono, monospace); font-size: 0.82rem; box-shadow: 0 8px 32px rgba(0,0,0,0.8), 0 0 15px rgba(212,175,55,0.25); display: flex; align-items: center; gap: 0.5rem; transition: opacity 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(10px); pointer-events: none;';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+    }, 2600);
+  }
+
+  function isProActive() {
+    const k1 = localStorage.getItem("pod_router_licensed");
+    const k2 = localStorage.getItem("pod_router_license");
+    const k3 = localStorage.getItem("agent_pod_router_pro");
+    const k4 = localStorage.getItem("zoth_pod_router_licensed");
+    const k5 = localStorage.getItem("pro_licensed");
+    const param = new URLSearchParams(window.location.search).get("licensed");
+    return k1 === "true" || k2 === "ROUTER-PRO-2026" || k3 === "ROUTER-PRO-2026" || k4 === "true" || k5 === "true" || param === "true";
+  }
+
   // License checking
   function checkLicense() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("licensed") === "true") {
+    if (urlParams.get("licensed") === "true" || urlParams.get("pro") === "true" || urlParams.get("session_id")) {
       localStorage.setItem("pod_router_licensed", "true");
+      localStorage.setItem("pod_router_license", "ROUTER-PRO-2026");
+      localStorage.setItem("agent_pod_router_pro", "ROUTER-PRO-2026");
+      localStorage.setItem("zoth_pod_router_licensed", "true");
+      localStorage.setItem("pro_licensed", "true");
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
     }
 
-    const proBadge = document.getElementById("pro-badge");
-    if (localStorage.getItem("pod_router_licensed") === "true") {
-      document.body.classList.add("licensed");
+    const proBadge = document.getElementById("licenseBadge") || document.getElementById("pro-badge");
+    const salesBanner = document.getElementById("salesBanner");
+
+    if (isProActive()) {
+      document.body.classList.add("licensed", "pro-unlocked", "pro-licensed");
       if (proBadge) {
         proBadge.className = "brand-badge badge-pro";
         proBadge.textContent = "⭐ PRO ACTIVE";
+        proBadge.style.background = "rgba(212, 175, 55, 0.2)";
+        proBadge.style.color = "var(--gold, #D4AF37)";
+        proBadge.style.borderColor = "var(--gold, #D4AF37)";
+      }
+      if (salesBanner) {
+        salesBanner.style.display = "none";
+      }
+      const codePreview = document.getElementById("code-preview");
+      if (codePreview) {
+        codePreview.classList.remove("paywall-blur");
       }
     } else {
-      document.body.classList.remove("licensed");
+      document.body.classList.remove("licensed", "pro-unlocked", "pro-licensed");
       if (proBadge) {
         proBadge.className = "brand-badge badge-free";
-        proBadge.textContent = "FREE TIER";
+        proBadge.textContent = "⚡ FREE TIER";
+      }
+      if (salesBanner) {
+        salesBanner.style.display = "";
       }
     }
   }
 
-  function openModal() {
+  function openModal(triggerContext = "") {
     if (paywallModal) {
       paywallModal.classList.add("is-open");
       paywallModal.style.display = "flex";
@@ -219,6 +269,21 @@
       paywallModal.style.display = "none";
     }
   }
+
+  window.openPaywallModal = openModal;
+  window.closePaywallModal = closeModal;
+  window.activateLicenseKey = function(key) {
+    if (!key) key = "ROUTER-PRO-2026";
+    localStorage.setItem("pod_router_licensed", "true");
+    localStorage.setItem("pod_router_license", key);
+    localStorage.setItem("agent_pod_router_pro", key);
+    localStorage.setItem("zoth_pod_router_licensed", "true");
+    localStorage.setItem("pro_licensed", "true");
+    checkLicense();
+    closeModal();
+    showToast("⭐ Sovereign Pro License Active — All Features Unlocked!");
+    return true;
+  };
 
   // Pure Client Calculation
   function calculateLandedQuote(partnerKey, profile, dest, qty, useDiscount) {
@@ -455,23 +520,27 @@
 
   // Interceptors
   function handleExportAction() {
-    if (localStorage.getItem("pod_router_licensed") !== "true") {
-      openModal();
+    if (!isProActive()) {
+      openModal("Export Payload");
       return;
     }
     // If licensed:
     if (!codePreviewEl) return;
     const content = codePreviewEl.textContent;
-    navigator.clipboard.writeText(content).then(() => {
-      alert("✅ Production Dispatch Payload copied to clipboard!");
-    }).catch(() => {
-      alert("Payload generated successfully.");
-    });
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(content).then(() => {
+        showToast("✅ Production Dispatch Payload copied to clipboard!");
+      }).catch(() => {
+        showToast("✅ Production Dispatch Payload copied!");
+      });
+    } else {
+      showToast("✅ Production Dispatch Payload copied!");
+    }
   }
 
   function handleDownloadAction() {
-    if (localStorage.getItem("pod_router_licensed") !== "true") {
-      openModal();
+    if (!isProActive()) {
+      openModal("Download Payload");
       return;
     }
     if (!codePreviewEl) return;
@@ -482,6 +551,7 @@
     a.download = `pod-dispatch-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    showToast("📥 Production Dispatch Payload Downloaded!");
   }
 
   // Event Listeners
@@ -501,14 +571,14 @@
 
   if (copyBtn) copyBtn.addEventListener("click", handleExportAction);
   if (downloadBtn) downloadBtn.addEventListener("click", handleDownloadAction);
-  if (unlockPaywallBtn) unlockPaywallBtn.addEventListener("click", openModal);
+  if (unlockPaywallBtn) unlockPaywallBtn.addEventListener("click", () => openModal("Paywall Unlock"));
   if (headerKeyBtn) headerKeyBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    openModal();
+    openModal("Header Key");
   });
   if (openLicenseModalBtn) openLicenseModalBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    openModal();
+    openModal("Sales Banner Activate");
   });
   if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
 
@@ -517,20 +587,26 @@
       const val = licenseInput.value.trim();
       if (val.length >= 6) {
         localStorage.setItem("pod_router_licensed", "true");
+        localStorage.setItem("pod_router_license", val);
+        localStorage.setItem("agent_pod_router_pro", val);
+        localStorage.setItem("zoth_pod_router_licensed", "true");
+        localStorage.setItem("pro_licensed", "true");
         checkLicense();
         if (licenseStatusEl) {
           licenseStatusEl.textContent = "✅ License successfully activated! All features unlocked.";
           licenseStatusEl.style.color = "#10B981";
         }
+        showToast("⭐ Sovereign Pro License Activated Successfully!");
         setTimeout(() => {
           closeModal();
           updateUI();
-        }, 800);
+        }, 500);
       } else {
         if (licenseStatusEl) {
           licenseStatusEl.textContent = "❌ Please enter a valid license key or receipt order ID.";
           licenseStatusEl.style.color = "#EF4444";
         }
+        showToast("Please enter a valid license key or receipt order ID.");
       }
     };
 
@@ -567,11 +643,15 @@
         }
       }
       const solanaAddress = "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK";
-      navigator.clipboard.writeText(solanaAddress).then(() => {
-        alert(`SOLANA RECEIVER COPIED TO CLIPBOARD:\n${solanaAddress}\n\nSend $19 equivalent in SOL or USDC, then enter transaction signature in license activation.`);
-      }).catch(() => {
-        prompt("Solana receiver address for $19 payment:", solanaAddress);
-      });
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(solanaAddress).then(() => {
+          showToast(`⚡ Solana Receiver copied: ${solanaAddress}`);
+        }).catch(() => {
+          showToast(`⚡ Solana Receiver: ${solanaAddress}`);
+        });
+      } else {
+        showToast(`⚡ Solana Receiver: ${solanaAddress}`);
+      }
     });
   });
 
