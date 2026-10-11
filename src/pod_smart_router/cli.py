@@ -44,6 +44,13 @@ def main():
     p_server.add_argument("--port", type=int, default=8117, help="Server port (default: 8117)")
 
     args = parser.parse_args()
+    try:
+        _run(args, parser)
+    except ValueError as e:  # includes UnknownSKUError
+        raise SystemExit(f"error: {e}")
+
+
+def _run(args, parser):
 
     if args.command == "route":
         decision = SmartRouter.route(

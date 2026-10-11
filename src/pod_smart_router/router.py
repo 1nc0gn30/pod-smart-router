@@ -7,6 +7,7 @@ delivery speed, and cross-border customs elimination.
 
 from __future__ import annotations
 
+import difflib
 import secrets
 import time
 from dataclasses import asdict, dataclass
@@ -62,6 +63,16 @@ class RoutingDecision:
         return data
 
 
+VALID_RULES = ("cheapest", "fastest", "balanced", "domestic_only", "customs_avoidance")
+
+# Value of one day of delivery time when trading cost against speed ("balanced").
+BALANCED_USD_PER_DAY = 0.50
+
+
+class UnknownSKUError(ValueError):
+    """Raised when a SKU cannot be matched to the catalog (never silently substituted)."""
+
+
 class SmartRouter:
     """Evaluates landed costs, manufacturing hubs, and delivery timelines."""
 
@@ -73,13 +84,21 @@ class SmartRouter:
 
     @classmethod
     def normalize_sku(cls, raw_sku: str) -> str:
-        s = raw_sku.lower().replace("-", "_").strip()
+        """Map a SKU to a catalog key. Accepts exact keys and unambiguous partial
+        matches; raises UnknownSKUError instead of guessing a different product."""
+        s = str(raw_sku or "").lower().replace("-", "_").replace(" ", "_").strip()
+        if not s:
+            raise UnknownSKUError("SKU is required")
         if s in CATALOG_MATRIX:
             return s
-        for key in CATALOG_MATRIX:
-            if key in s or s in key:
-                return key
-        return "gildan_18000"
+        partial = [k for k in CATALOG_MATRIX if (k in s or s in k)]
+        if len(s) >= 4 and len(partial) == 1:
+            return partial[0]
+        hints = partial or difflib.get_close_matches(s, list(CATALOG_MATRIX), n=3, cutoff=0.5)
+        msg = f"Unknown SKU {raw_sku!r}"
+        if hints:
+            msg += f" (ambiguous or close to: {', '.join(hints)})"
+        raise UnknownSKUError(msg + f". Valid SKUs: {', '.join(CATALOG_MATRIX)}")
 
     def route_order(
         self,
@@ -91,14 +110,17 @@ class SmartRouter:
     ) -> RoutingDecision:
         """Evaluate order and compute optimal POD partner."""
         dest = destination_country.upper().strip()
-        qty = max(1, int(quantity))
-        priority = shipping_priority.lower().strip()
-        if priority not in ("cheapest", "fastest", "balanced", "domestic_only", "customs_avoidance"):
-            priority = "cheapest"
+        if not (len(dest) == 2 and dest.isalpha()):
+            raise ValueError(f"destination_country must be an ISO-3166 alpha-2 code, got {destination_country!r}")
+        qty = int(quantity)
+        if qty < 1:
+            raise ValueError("quantity must be >= 1")
+        priority = (shipping_priority or "balanced").lower().strip()
+        if priority not in VALID_RULES:
+            raise ValueError(f"Unknown routing rule {shipping_priority!r}. Use one of: {', '.join(VALID_RULES)}")
 
-        # Lookup catalog item
-        norm_key = self.normalize_sku(product_id)
-        item = CATALOG_MATRIX.get(norm_key, CATALOG_MATRIX["gildan_18000"])
+        # Lookup catalog item (raises UnknownSKUError rather than substituting)
+        item = CATALOG_MATRIX[self.normalize_sku(product_id)]
 
         # 1. Quote Printify
         quote_pr = self._calculate_quote(
@@ -239,6 +261,21 @@ class SmartRouter:
                 return q_gelato, q_printify, f"Gelato selected: Local factory in {dest_country} guarantees zero customs duty and faster delivery."
             if q_printify.is_domestic_factory and not q_gelato.is_domestic_factory:
                 return q_printify, q_gelato, f"Printify selected: Domestic factory active in {dest_country}."
+
+        # Rule: Balanced = keep domestic (zero customs) when any partner has it,
+        # then minimise landed cost + time value of delivery days.
+        if priority == "balanced":
+            pool = [q for q in (q_printify, q_gelato) if q.is_domestic_factory] or [q_printify, q_gelato]
+            score = lambda q: q.total_landed_cost + BALANCED_USD_PER_DAY * q.total_delivery_days
+            winner = min(pool, key=lambda q: (score(q), q.total_landed_cost))
+            alt = q_gelato if winner is q_printify else q_printify
+            why = (f"{winner.partner.title()} selected (balanced): ${winner.total_landed_cost:.2f} landed, "
+                   f"{winner.total_delivery_days}d delivery vs {alt.partner.title()} ${alt.total_landed_cost:.2f}, {alt.total_delivery_days}d")
+            if winner.is_domestic_factory:
+                why += f"; domestic factory in {dest_country}, zero customs."
+            else:
+                why += "; no domestic factory available for this destination."
+            return winner, alt, why
 
         # Rule B: Fastest Delivery
         if priority == "fastest":
