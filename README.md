@@ -1,5 +1,9 @@
 # POD Smart Router
 
+> ⚡ **Live Web Application**: [https://pod-smart-router.netlify.app](https://pod-smart-router.netlify.app)  
+> 💳 **Unlock Pro Lifetime License ($19 One-Time, $0/mo)**: **[Instant Pro Unlock via Stripe](https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L)** *(Use promo code `FOUNDER25` for 25% off)*  
+> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**
+
 Picks Printify or Gelato for each print-on-demand order by comparing landed
 cost (base + shipping + estimated customs/VAT), delivery days and whether the
 partner has a factory in the destination country. Pure Python stdlib.
