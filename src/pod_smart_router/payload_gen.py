@@ -66,7 +66,7 @@ class DispatchPayloadGenerator:
                 "state": address.get("state", ""),
                 "country": decision.destination_country,
                 "email": address.get("email", "orders@nullai.tech"),
-                "phone": address.get("phone", "+15550192834")
+                "phone": address.get("phone", "+19482047987")
             },
             "routing_telemetry": {
                 "routed_by": "pod-smart-router-v1",
@@ -106,7 +106,7 @@ class DispatchPayloadGenerator:
                 "first_name": address.get("first_name", "John"),
                 "last_name": address.get("last_name", "Smith"),
                 "email": address.get("email", "orders@nullai.tech"),
-                "phone": address.get("phone", "+15550192834"),
+                "phone": address.get("phone", "+19482047987"),
                 "country": decision.destination_country,
                 "region": address.get("state") or address.get("region", "VA"),
                 "address1": address.get("address1", "400 Granby St"),
