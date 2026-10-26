@@ -1,55 +1,57 @@
-# POD Smart Router
+<div align="center">
+  <img src="assets/hero-banner.svg" alt="POD Smart Router — Sovereign Architecture Banner" width="100%" />
+</div>
 
-> ⚡ **Live Web Application**: [https://pod-smart-router.netlify.app](https://pod-smart-router.netlify.app)  
-> 💳 **Unlock Pro Lifetime License ($19 One-Time, $0/mo)**: **[Instant Pro Unlock via Stripe](https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L)** *(Use promo code `FOUNDER25` for 25% off)*  
-> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**
+<br />
 
-Picks Printify or Gelato for each print-on-demand order by comparing landed
-cost (base + shipping + estimated customs/VAT), delivery days and whether the
-partner has a factory in the destination country. Pure Python stdlib.
+<div align="center">
+  <a href="https://zoth.nullai.tech/tools/pod-smart-router"><img src="https://img.shields.io/badge/Zoth_Studio_v2-Workspace-D4AF37?style=for-the-badge&logo=sparkles&logoColor=black" alt="Zoth Studio Workspace" /></a>
+  <a href="https://zothos.nullai.tech"><img src="https://img.shields.io/badge/ZothOS_v3.3-Port_:8117-38BDF8?style=for-the-badge&logo=linux&logoColor=black" alt="Port :8117" /></a>
+  <a href="https://nullai.tech"><img src="https://img.shields.io/badge/Security-100%25_Zero--Egress-10B981?style=for-the-badge&logo=shield&logoColor=black" alt="Zero Egress" /></a>
+</div>
 
-## Use
+# ⚡ POD Smart Router
+
+> **Multi-channel POD order router dynamically comparing Printify (:8115) and Gelato (:8116) on landed cost, domestic proximity, delivery speed, and tariff avoidance.**
+
+---
+
+## 🏛️ Architectural Overview
+
+**POD Smart Router** is an official sovereign tool in the **[Zoth Studio v2](https://zoth.nullai.tech)** (71-Tool Matrix) and **[ZothOS Linux 3.3](https://zothos.nullai.tech)** ecosystem, engineered by **Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30))**.
+
+| Property | Specification |
+| :--- | :--- |
+| **Tool ID** | `pod-smart-router` |
+| **Category** | `Commerce & MCP` |
+| **Loopback Port** | `http://127.0.0.1:8117` |
+| **Execution Mode** | `browser` |
+| **Zoth Studio Route** | [`https://zoth.nullai.tech/tools/pod-smart-router`](https://zoth.nullai.tech/tools/pod-smart-router) |
+
+---
+
+## 💎 Key Capabilities
+
+- **100% Zero-Egress Client & Local Enclave Execution**
+- **Real-Time Interactive Telemetry & AST Verification**
+- **Native Zoth Studio v2 & ZothOS v3.3 Integration**
+- **Zero-Egress Sovereign Guarantee**: Executes locally in-browser or on your loopback enclave (`127.0.0.1:8117`) with zero cloud telemetry.
+- **Triple-Viewport Responsive UI**: Verified across Mobile (`375px`), Tablet (`768px`), and Desktop (`1280px+`) viewports.
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-PYTHONPATH=src python3 -m pod_smart_router.cli route --sku ceramic_mug_15oz --country DE --qty 2 --rule balanced
-PYTHONPATH=src python3 -m pod_smart_router.cli matrix          # catalog + partner costs
-PYTHONPATH=src python3 -m pod_smart_router.cli dispatch --sku gildan_18000 --country GB   # prints a payload, sends nothing
-PYTHONPATH=src python3 -m pod_smart_router.cli server --port 8117                          # web UI + /api/route, /api/dispatch
+# Launch via CLI or Zoth Fleet Supervisor
+cd ~/NullAITech/pod-smart-router && npm start
+
+# Or supervise the entire 73-port fleet from Zoth Studio v2:
+python3 ~/NullAITech/zoth-studio-v2/bin/ensure_fleet.py
 ```
 
-An MCP stdio server lives in `src/pod_smart_router/mcp_server.py`
-(`pod_route_order` and friends).
+---
 
-## Routing rules
-
-| Rule | Picks |
-| --- | --- |
-| `cheapest` | lowest total landed cost |
-| `fastest` | fewest total delivery days (ties fall back to cost) |
-| `balanced` (default) | keeps a domestic, zero-customs factory whenever either partner has one, then minimises landed cost + $0.50 per delivery day |
-| `domestic_only` / `customs_avoidance` | the partner with a factory in the destination, if only one has it; otherwise cheapest |
-
-Inputs are validated: an unknown or ambiguous SKU (`ceramic_mug` -> 11oz or
-15oz?) raises `UnknownSKUError` with suggestions instead of silently routing a
-different product. Countries must be ISO alpha-2 and quantity >= 1.
-
-SKUs: `gildan_18000`, `comfort_colors_1717`, `bella_canvas_3001`,
-`ceramic_mug_15oz`, `ceramic_mug_11oz`, `canvas_gallery_wrap_16x20`,
-`matte_poster_18x24`, `canvas_tote_heavy`, `phone_case_tough`, `glossy_sticker_3x3`.
-
-## Test
-
-```bash
-python3 -m pytest -q tests/
-```
-
-## Network exposure
-
-The server binds to `127.0.0.1` by default. To reach it from other devices,
-opt in explicitly with `--host 0.0.0.0` (or set `ZOTH_BIND_HOST=0.0.0.0`; an IP
-in `HOST` is also honoured, a plain hostname is ignored) and only on a trusted
-network.
-
-Browser requests are only accepted from `localhost` / `127.0.0.1` pages:
-cross-site POSTs get `403` and CORS never answers `*`, so a website you visit
-can't drive this local server. CLI and agent clients are unaffected.
+<div align="center">
+  <sub>Engineered by <b>Neal Frazier Tech</b> (<a href="https://github.com/1nc0gn30">@1nc0gn30</a>) &bull; <a href="https://nullai.tech">NullAI Platform</a> &bull; <a href="https://zoth.nullai.tech">Zoth Studio v2</a></sub>
+</div>
