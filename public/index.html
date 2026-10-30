@@ -45,7 +45,7 @@
         },
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
           "url": "https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"
@@ -76,7 +76,7 @@
             "name": "What is the Lifetime Founding Member license?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A one-time payment of $19 grants perpetual commercial access to the routing engine, CLI tool, MCP agent tools, and unlimited client-side dispatch generation with zero recurring monthly fees."
+              "text": "A one-time payment of Free (100% Open Access) grants perpetual commercial access to the routing engine, CLI tool, MCP agent tools, and unlimited client-side dispatch generation with zero recurring monthly fees."
             }
           }
         ]
@@ -84,8 +84,47 @@
     ]
   }
   </script>
+
+  <!-- Zoth 100% Open-Access & Buy Us a Coffee Invariant -->
+  <script id="zoth-open-access-init">
+    (function() {
+      try {
+        var keys = ['agent_audiocipher_pro', 'agent_cyber_turtle_pro', 'agent_datamosh_pro', 'agent_nexus3d_pro', 'agent_policy_pro', 'audiocipher_license', 'audiocipher_pro_licensed', 'badge3d_pro_licensed', 'certpath_pro_key', 'certpath_pro_licensed', 'cron_rhythm_pro_key', 'cron_rhythm_pro_licensed', 'cwv-speed-engine_pro_licensed', 'cwv_pro_licensed', 'cyber_turtle_pro_licensed', 'datamosh_pro_licensed', 'deepsearch-research-agent_pro_licensed', 'deepsearch_pro_licensed', 'entropy_studio_licensed', 'envguard-secrets-vault_pro_licensed', 'envguard_pro_license', 'etsy_connector_pro', 'jwt_guard_licensed', 'mdg_pro_licensed', 'neuro_pro_licensed', 'nexus3d_pro_licensed', 'omnipost_pro_key', 'omnipost_pro_licensed', 'osint_pro_licensed', 'payload-entropy-studio_pro_licensed', 'polyglot_pro_licensed', 'pro_licensed', 'promptmaster_pro_licensed', 'promptmaster_pro_active', 'robots-txt-auditor_pro_licensed', 'robots_pro_licensed', 'schema_illustrator_pro_licensed', 'sovereign_pro_licensed', 'subsweep-lead-scanner_pro_licensed', 'subsweep_licensed', 'turtle_pro_licensed', 'ufo_sacred_licensed', 'vector-search-engine_pro_licensed', 'vector_studio_pro_licensed', 'web-security-guard_pro_licensed', 'web_security_guard_licensed', 'yourdigitalspace_pro', 'zela_guide_pro_licensed', 'zoth_ascii_magic_pro', 'zoth_audiocipher_licensed', 'zoth_badge3d_licensed', 'zoth_cyber_turtle_licensed', 'zoth_datamosh_licensed', 'zoth_etsy_licensed', 'zoth_nexus3d_licensed', 'zoth_osint_licensed', 'zoth_policy_licensed', 'zoth_sacred_licensed', 'zoth_ufo_licensed'];
+        for (var i = 0; i < keys.length; i++) {
+          localStorage.setItem(keys[i], 'true');
+        }
+        localStorage.setItem('pm_license_v2', JSON.stringify({ method: 'open_access', ref: 'free_forever', at: '2026-01-01T00:00:00Z' }));
+        window.isPro = true;
+        window.isProLicensed = true;
+      } catch (e) {}
+    })();
+  </script>
+  <style id="zoth-open-access-override">
+    .paywall-overlay, .output-paywall-overlay, #outputPaywallOverlay, #schemaPaywallOverlay,
+    #transformerPaywallOverlay, #proPaywallModal, #licenseModal, #salesBanner, #founding-offer-banner,
+    #funnelHeroBanner, [data-alias="paywallOverlay"], [data-alias="founding-offer-banner"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .paywall-wrap #outputPreview, .paywall-wrap #reportContentArea, .paywall-content,
+    .paywall-content.locked, .paywall-wrap.is-locked #outputPreview, .paywall-wrap.locked #outputPreview {
+      filter: none !important;
+      -webkit-filter: none !important;
+      user-select: auto !important;
+      pointer-events: auto !important;
+    }
+  </style>
+
 </head>
 <body>
+
+<div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
+  <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
+  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
+</div>
+
   <div class="ambient-glow"></div>
 
   <!-- Main Navigation Header -->
@@ -98,9 +137,9 @@
         <span id="licenseBadge" data-alias="pro-badge" class="brand-badge badge-free">⚡ FREE TIER</span>
       </div>
       <div class="header-actions">
-        <button id="btn-header-key" class="btn btn-secondary btn-sm" onclick="window.openPaywallModal ? window.openPaywallModal('Header Key Button') : null">Enter Key</button>
         <a href="#simulator" class="btn btn-secondary btn-sm">Simulator</a>
-        <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Get Pro ($19)</a>
+        <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" class="btn btn-primary btn-sm">☕ Buy Us a Coffee</a>
+        <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied!';}" class="btn btn-solana btn-sm">◎ Solana Tip</a>
       </div>
     </div>
   </header>
@@ -121,8 +160,8 @@
         </div>
         <div class="banner-right">
           <div class="price-lockup">
-            <span class="price-regular">$79</span>
-            <span class="price-deal">$19</span>
+            <span class="price-regular">Free (100% Open Access)</span>
+            <span class="price-deal">Free (100% Open Access)</span>
             <span class="price-sub">/ Lifetime Access</span>
           </div>
           <div class="banner-cta-group">
@@ -333,7 +372,7 @@
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
             <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" class="btn btn-primary">
-              Unlock Full Access — $19 Lifetime
+              Unlock Full Access — Free (100% Open Access)
             </a>
             <button id="btn-depay-paywall" class="btn btn-solana btn-depay-trigger" data-depay>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
@@ -373,7 +412,7 @@
       <button id="modal-close-btn" class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
         <h2 class="modal-title">Unlock Lifetime Founding Access</h2>
-        <p class="modal-subtitle">One-time payment of $19 • Zero recurring monthly fees • Unlimited order dispatches</p>
+        <p class="modal-subtitle">One-time payment of Free (100% Open Access) • Zero recurring monthly fees • Unlimited order dispatches</p>
       </div>
 
       <ul class="benefits-checklist">
@@ -406,7 +445,7 @@
         </a>
         <button id="btn-depay-modal" class="btn btn-solana btn-depay-trigger" data-depay style="width: 100%; justify-content: center;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18h14.5l2-3.5H6L4 18zm2-7h14.5l-2-3.5H4L6 11zm12-7H3.5l2 3.5H20l-2-3.5z"/></svg>
-          Pay with Solana / Crypto ($19)
+          Pay with Solana / Crypto (Free (100% Open Access))
         </button>
       </div>
 

@@ -33,6 +33,7 @@ html, body {
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   overflow-x: hidden;
+  max-width: 100vw;
   width: 100%;
   min-height: 100vh;
 }
@@ -569,10 +570,10 @@ input:checked + .toggle-slider:before {
 }
 
 .paywall-blur {
-  filter: blur(6px);
-  transition: filter 0.4s ease;
-  user-select: none;
-  pointer-events: none;
+  filter: none !important;
+  transition: none !important;
+  user-select: text !important;
+  pointer-events: auto !important;
 }
 
 body.licensed .paywall-blur {
@@ -581,21 +582,12 @@ body.licensed .paywall-blur {
   pointer-events: auto !important;
 }
 
-.paywall-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(7, 9, 14, 0.65);
-  backdrop-filter: blur(3px);
-  z-index: 10;
-  padding: 20px;
-  text-align: center;
-}
-
-body.licensed .paywall-overlay {
+.paywall-overlay,
+#salesBanner,
+#paywall-modal,
+#btn-depay-solana,
+#btn-header-key,
+#btn-open-license-modal {
   display: none !important;
 }
 

@@ -202,13 +202,7 @@
   }
 
   function isProActive() {
-    const k1 = localStorage.getItem("pod_router_licensed");
-    const k2 = localStorage.getItem("pod_router_license");
-    const k3 = localStorage.getItem("agent_pod_router_pro");
-    const k4 = localStorage.getItem("zoth_pod_router_licensed");
-    const k5 = localStorage.getItem("pro_licensed");
-    const param = new URLSearchParams(window.location.search).get("licensed");
-    return k1 === "true" || k2 === "ROUTER-PRO-2026" || k3 === "ROUTER-PRO-2026" || k4 === "true" || k5 === "true" || param === "true";
+    return true;
   }
 
   // License checking
@@ -232,10 +226,10 @@
       document.body.classList.add("licensed", "pro-unlocked", "pro-licensed");
       if (proBadge) {
         proBadge.className = "brand-badge badge-pro";
-        proBadge.textContent = "⭐ PRO ACTIVE";
-        proBadge.style.background = "rgba(212, 175, 55, 0.2)";
-        proBadge.style.color = "var(--gold, #D4AF37)";
-        proBadge.style.borderColor = "var(--gold, #D4AF37)";
+        proBadge.textContent = "✦ 100% UNLOCKED";
+        proBadge.style.background = "rgba(16, 185, 129, 0.2)";
+        proBadge.style.color = "var(--emerald, #10B981)";
+        proBadge.style.borderColor = "var(--emerald, #10B981)";
       }
       if (salesBanner) {
         salesBanner.style.display = "none";
