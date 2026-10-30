@@ -24,7 +24,7 @@ def main():
     p_route.add_argument("--country", default="US", help="Destination country code (US, GB, DE, FR, CA, AU)")
     p_route.add_argument("--qty", type=int, default=1, help="Item quantity")
     p_route.add_argument("--rule", default="balanced", choices=["cheapest", "fastest", "balanced", "domestic_only", "customs_avoidance"])
-    p_route.add_argument("--no-premium", action="store_true", help="Disable Printify Premium 20% discount calculation")
+    p_route.add_argument("--no-premium", action="store_true", help="Disable Printify Premium 20%% discount calculation")
     p_route.add_argument("--json", action="store_true", help="Output raw JSON")
 
     # Command: matrix
