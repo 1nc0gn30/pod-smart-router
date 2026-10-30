@@ -1,0 +1,219 @@
+/* ==========================================================================
+   POD Smart Router — Wave Working Tool Surface Polish (Wave 6)
+   Visual Anchor: Sovereign Precision Telemetry
+   Hierarchy refinement, visible focus rings, & result entrance choreography.
+   ========================================================================== */
+
+/* --- 1. Type Hierarchy & Telemetry Eyebrows --- */
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+}
+
+.panel-title svg {
+  color: var(--gold-base, #D4AF37);
+  flex-shrink: 0;
+}
+
+.form-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #94A3B8);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.toggle-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-main, #F1F5F9);
+}
+
+.partner-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.partner-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.cost-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-dim, #64748B);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.cost-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #F8FAFC;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.spec-list {
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.spec-item {
+  padding: 8px 0;
+  font-size: 0.84rem;
+  color: var(--text-muted, #94A3B8);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.spec-item:first-child {
+  border-top: none;
+}
+
+.spec-item .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F1F5F9;
+  letter-spacing: -0.01em;
+}
+
+.winner-metric {
+  gap: 3px;
+}
+
+.metric-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(52, 211, 153, 0.85);
+}
+
+.metric-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #34D399;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+#summary-reason {
+  border-left: 2px solid var(--emerald, #10B981);
+  padding-left: 12px;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #CBD5E1;
+  background: rgba(16, 185, 129, 0.04);
+  border-radius: 0 6px 6px 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* --- 2. High-Contrast Visible Focus States --- */
+.select-control:focus-visible,
+.input-control:focus-visible {
+  outline: 2px solid var(--border-active, #D4AF37);
+  outline-offset: 2px;
+  border-color: var(--border-active, #D4AF37);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--gold-glow, #FFDF70);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--border-active, #D4AF37);
+  outline-offset: 2px;
+}
+
+.toggle-switch input:focus-visible + .toggle-slider {
+  outline: 2px solid var(--emerald, #10B981);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--border-active, #D4AF37);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- 3. Result Appearance Motion (Transform + Opacity) --- */
+.partner-card {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 180ms ease,
+              box-shadow 180ms ease;
+}
+
+.partner-card.is-winner {
+  animation: waveResultReveal 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.partner-card.is-winner .winner-ribbon {
+  animation: waveRibbonReveal 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.winner-summary-card {
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+@keyframes waveResultReveal {
+  from {
+    opacity: 0.88;
+    transform: translateY(4px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes waveRibbonReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- 4. Accessibility / Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .partner-card,
+  .partner-card.is-winner,
+  .partner-card.is-winner .winner-ribbon,
+  .winner-summary-card,
+  .btn,
+  .select-control,
+  .input-control,
+  .toggle-slider {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

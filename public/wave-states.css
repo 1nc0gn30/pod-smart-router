@@ -1,0 +1,252 @@
+/* ==========================================================================
+   POD Smart Router — Wave States Polish (Wave 6)
+   Visual Anchor: Sovereign Precision Telemetry — Tactile Interactive States
+   Focused specifically on :focus-visible, hover, empty & error presentation,
+   and prefers-reduced-motion ergonomics.
+   ========================================================================== */
+
+/* --- 1. Tactile Hover States & Transitions --- */
+.btn {
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 140ms ease,
+              border-color 140ms ease,
+              box-shadow 140ms ease,
+              color 140ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, #FFE885 0%, #DFBA40 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #FFFFFF;
+}
+
+.btn-secondary:active {
+  transform: scale(0.99);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-solana:hover {
+  background: rgba(20, 241, 149, 0.22);
+  border-color: rgba(20, 241, 149, 0.6);
+  box-shadow: 0 4px 20px rgba(20, 241, 149, 0.35);
+  color: #2DF5A3;
+}
+
+.btn-solana:active {
+  transform: scale(0.99);
+  box-shadow: 0 2px 10px rgba(20, 241, 149, 0.2);
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Control Hover States */
+.select-control,
+.input-control {
+  transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 150ms ease,
+              box-shadow 150ms ease;
+}
+
+.select-control:hover,
+.input-control:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  background-color: rgba(14, 20, 32, 0.85);
+}
+
+.toggle-group {
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.toggle-group:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(14, 20, 32, 0.75);
+}
+
+.toggle-switch:hover .toggle-slider {
+  filter: brightness(1.15);
+}
+
+.modal-close {
+  transition: color 140ms ease, transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-close:hover {
+  color: #FFFFFF;
+  transform: scale(1.12);
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+#btn-open-license-modal {
+  transition: color 140ms ease;
+}
+
+#btn-open-license-modal:hover {
+  color: var(--gold-glow, #FFDF70) !important;
+}
+
+.faq-card {
+  transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 160ms ease,
+              transform 160ms ease;
+}
+
+.faq-card:hover {
+  border-color: rgba(212, 175, 55, 0.28);
+  background-color: rgba(18, 24, 38, 0.85);
+}
+
+.footer-links a {
+  transition: color 140ms ease;
+}
+
+.footer-links a:hover {
+  color: var(--gold-glow, #FFDF70);
+}
+
+/* --- 2. Precision :focus-visible Rings --- */
+.select-control:focus-visible,
+.input-control:focus-visible {
+  outline: 2px solid var(--gold-base, #D4AF37);
+  outline-offset: 2px;
+  border-color: var(--gold-base, #D4AF37);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--gold-glow, #FFDF70);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--gold-base, #D4AF37);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+.btn-solana:focus-visible {
+  outline: 2px solid #14F195;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(20, 241, 149, 0.35);
+}
+
+.toggle-switch input:focus-visible + .toggle-slider {
+  outline: 2px solid var(--emerald, #10B981);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--gold-base, #D4AF37);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+#btn-open-license-modal:focus-visible {
+  outline: 2px solid var(--gold-base, #D4AF37);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.footer-links a:focus-visible,
+.app-footer a:focus-visible {
+  outline: 2px solid var(--gold-base, #D4AF37);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- 3. Error Presentation & Empty States --- */
+.input-control:invalid,
+.input-control:user-invalid {
+  border-color: var(--ruby, #EF4444);
+  box-shadow: 0 0 0 1px var(--ruby, #EF4444), 0 0 12px rgba(239, 68, 68, 0.25);
+}
+
+.input-control:invalid:focus-visible,
+.input-control:user-invalid:focus-visible {
+  outline: 2px solid var(--ruby, #EF4444);
+  outline-offset: 2px;
+  border-color: var(--ruby, #EF4444);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+#license-status:empty {
+  display: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#license-status:not(:empty) {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid currentColor;
+  margin-top: 10px;
+}
+
+#code-preview:empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  font-style: italic;
+  color: var(--text-dim, #64748B);
+}
+
+#summary-reason:empty {
+  display: none;
+}
+
+/* --- 4. Ergonomics: prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-solana,
+  .select-control,
+  .input-control,
+  .toggle-group,
+  .toggle-slider,
+  .modal-close,
+  .faq-card,
+  #btn-open-license-modal,
+  .footer-links a {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-solana:active,
+  .modal-close:hover,
+  .modal-close:active {
+    transform: none !important;
+  }
+}
