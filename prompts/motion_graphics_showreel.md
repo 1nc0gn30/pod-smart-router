@@ -39,6 +39,6 @@
 
 ### Scene 4: The 1-Click Sovereign Unlock (11.5s – 15.0s)
 - **Visual**: The frosted glass paywall dissolves in a smooth chromatic ripple. Validated Printify & Gelato dispatch JSON streams into the terminal.
-- **CTA**: "POD Smart Router • $19 Lifetime Founding Access".
-- **Attribution**: "Engineered by Neal Frazier Tech • nullai.tech".
+- **CTA**: "POD Smart Router • $0 Lifetime Founding Access".
+- **Attribution**: "Engineered by 1nc0gn30 • NullAI • nullai.tech".
 - **Audio**: Crisp golden chime with sub-bass resolve.

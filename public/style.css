@@ -283,7 +283,7 @@ html, body {
 /* Bento Cockpit Grid */
 .bento-cockpit {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: 24px;
   margin-bottom: 32px;
 }
@@ -294,6 +294,9 @@ html, body {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 28px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .panel-header {
@@ -890,7 +893,7 @@ body.licensed .paywall-blur {
 /* Responsive Breakpoints */
 @media (max-width: 960px) {
   .bento-cockpit {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .banner-right {
     align-items: flex-start;
