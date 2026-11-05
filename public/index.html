@@ -324,6 +324,22 @@
 
   <script src="/hero_canvas.js"></script>
   <script src="/app.js"></script>
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "pod-smart-router",
+          toolName: "POD Smart Router",
+          tagline: "Automatically routes customer orders to the closest and cheapest print provider!",
+          accentColor: "#3B82F6",
+          steps: [{"icon": "\ud83e\udded", "title": "Smart Order Routing", "desc": "When a customer buys, this router automatically picks the best printer based on buyer location and stock."}, {"icon": "\u26a1", "title": "Cut Shipping Delays", "desc": "Avoids international customs delays by printing in the recipient's home country whenever possible."}, {"icon": "\ud83d\udcb0", "title": "Maximize Profit Margins", "desc": "Constantly balances print costs vs shipping speed to keep your net profit as high as possible."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
