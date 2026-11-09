@@ -205,6 +205,21 @@
     return true;
   }
 
+  function copySolanaAddress(btn) {
+    const addr = "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK";
+    navigator.clipboard.writeText(addr).then(() => {
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = "✓ Solana Address Copied!";
+        setTimeout(() => { btn.textContent = orig; }, 2500);
+      }
+      showToast("✓ Solana Tip Address copied to clipboard!");
+    }).catch(() => {
+      window.open("solana:" + addr, "_blank");
+    });
+  }
+  window.copySolanaAddress = copySolanaAddress;
+
   // License checking
   function checkLicense() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -222,31 +237,20 @@
     const proBadge = document.getElementById("licenseBadge") || document.getElementById("pro-badge");
     const salesBanner = document.getElementById("salesBanner");
 
-    if (isProActive()) {
-      document.body.classList.add("licensed", "pro-unlocked", "pro-licensed");
-      if (proBadge) {
-        proBadge.className = "brand-badge badge-pro";
-        proBadge.textContent = "✦ 100% UNLOCKED";
-        proBadge.style.background = "rgba(16, 185, 129, 0.2)";
-        proBadge.style.color = "var(--emerald, #10B981)";
-        proBadge.style.borderColor = "var(--emerald, #10B981)";
-      }
-      if (salesBanner) {
-        salesBanner.style.display = "none";
-      }
-      const codePreview = document.getElementById("code-preview");
-      if (codePreview) {
-        codePreview.classList.remove("paywall-blur");
-      }
-    } else {
-      document.body.classList.remove("licensed", "pro-unlocked", "pro-licensed");
-      if (proBadge) {
-        proBadge.className = "brand-badge badge-free";
-        proBadge.textContent = "⚡ FREE TIER";
-      }
-      if (salesBanner) {
-        salesBanner.style.display = "";
-      }
+    document.body.classList.add("licensed", "pro-unlocked", "pro-licensed");
+    if (proBadge) {
+      proBadge.className = "brand-badge badge-pro";
+      proBadge.textContent = "✦ 100% UNLOCKED";
+      proBadge.style.background = "rgba(16, 185, 129, 0.2)";
+      proBadge.style.color = "var(--emerald, #10B981)";
+      proBadge.style.borderColor = "var(--emerald, #10B981)";
+    }
+    if (salesBanner) {
+      salesBanner.style.display = "none";
+    }
+    const codePreview = document.getElementById("code-preview");
+    if (codePreview) {
+      codePreview.classList.remove("paywall-blur");
     }
   }
 
@@ -512,13 +516,8 @@
     }
   }
 
-  // Interceptors
+  // Action handlers (100% unlocked by default)
   function handleExportAction() {
-    if (!isProActive()) {
-      openModal("Export Payload");
-      return;
-    }
-    // If licensed:
     if (!codePreviewEl) return;
     const content = codePreviewEl.textContent;
     if (navigator.clipboard) {
@@ -533,10 +532,6 @@
   }
 
   function handleDownloadAction() {
-    if (!isProActive()) {
-      openModal("Download Payload");
-      return;
-    }
     if (!codePreviewEl) return;
     const blob = new Blob([codePreviewEl.textContent], { type: "application/json" });
     const url = URL.createObjectURL(blob);
