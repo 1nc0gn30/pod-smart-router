@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="POD Smart Router: Autonomous Print-on-Demand order routing engine across Printify and Gelato" width="100%" />
+  <img src="assets/hero-banner.svg" alt="POD Smart Router: Autonomous Print-on-Demand order routing engine across Printify and Gelato" width="100%" />
 </p>
 
 # POD Smart Router
