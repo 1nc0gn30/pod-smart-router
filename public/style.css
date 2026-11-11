@@ -572,23 +572,20 @@ input:checked + .toggle-slider:before {
   max-width: 100%;
 }
 
-.paywall-blur {
+.code-unlocked {
   filter: none !important;
   transition: none !important;
   user-select: text !important;
   pointer-events: auto !important;
 }
 
-body.licensed .paywall-blur {
+body.licensed .code-unlocked {
   filter: none !important;
   user-select: text !important;
   pointer-events: auto !important;
 }
 
-.paywall-overlay,
 #salesBanner,
-#paywall-modal,
-#btn-depay-solana,
 #btn-header-key,
 #btn-open-license-modal {
   display: none !important;
@@ -681,7 +678,7 @@ body.licensed .paywall-blur {
   min-height: 36px;
 }
 
-/* Paywall Modal */
+/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;

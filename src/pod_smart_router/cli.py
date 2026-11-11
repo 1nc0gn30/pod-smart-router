@@ -11,12 +11,59 @@ from .router import SmartRouter
 from .payload_gen import DispatchPayloadGenerator
 from .server import run_server
 
+
+def cmd_status(host: str = "127.0.0.1", port: int = 8117, as_json: bool = False) -> int:
+    import urllib.request
+    url = f"http://{host}:{port}/health"
+    live_info = None
+    try:
+        with urllib.request.urlopen(url, timeout=2.0) as resp:
+            live_info = json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        pass
+
+    products = get_all_products()
+
+    data = {
+        "status": "online" if live_info else "standby",
+        "service": "pod-smart-router",
+        "version": "2.5.0",
+        "port": port,
+        "catalog_count": len(products),
+        "supported_destinations": ["US", "CA", "GB", "DE", "FR", "IT", "ES", "AU", "NZ", "JP", "NL", "SE", "GLOBAL"],
+        "routing_rules": ["cheapest", "fastest", "balanced", "domestic_only", "customs_avoidance"],
+        "license": "MIT",
+        "daemon": live_info,
+    }
+
+    if as_json:
+        print(json.dumps(data, indent=2))
+        return 0
+
+    print("POD SMART ROUTER v2.5.0")
+    print(f"Daemon Status: {data['status'].upper()} ({url})")
+    print(f"Catalog Matrix: {len(products)} benchmark items")
+    print("Routing Rules:  cheapest, fastest, balanced, domestic_only, customs_avoidance")
+    print("License:        MIT (100% Free & Open-Source)")
+    return 0
+
 def main():
     parser = argparse.ArgumentParser(
         prog="pod-smart-router",
         description="Autonomous Multi-Channel Print-on-Demand Routing Engine (Printify vs Gelato)"
     )
+    parser.add_argument("-v", "--version", action="version", version="pod-smart-router 2.5.0")
+    parser.add_argument("--status", action="store_true", help="Print local service status and configuration")
+    parser.add_argument("--json", action="store_true", help="Output status/telemetry as JSON")
+    parser.add_argument("--host", default="127.0.0.1", help="Host interface (default: 127.0.0.1)")
+    parser.add_argument("--port", type=int, default=8117, help="Port to check (default: 8117)")
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
+
+    # Command: status
+    p_status = subparsers.add_parser("status", help="Check local service and API configuration status")
+    p_status.add_argument("--host", default="127.0.0.1", help="Host interface")
+    p_status.add_argument("--port", type=int, default=8117, help="Port (default: 8117)")
+    p_status.add_argument("--json", action="store_true", help="Output status report as JSON")
 
     # Command: route
     p_route = subparsers.add_parser("route", help="Calculate optimal POD routing decision")
@@ -44,6 +91,8 @@ def main():
     p_server.add_argument("--port", type=int, default=8117, help="Server port (default: 8117)")
 
     args = parser.parse_args()
+    if getattr(args, "status", False) or (getattr(args, "json", False) and not args.command):
+        return cmd_status(host=getattr(args, "host", "127.0.0.1"), port=getattr(args, "port", 8117), as_json=bool(getattr(args, "json", False)))
     try:
         _run(args, parser)
     except ValueError as e:  # includes UnknownSKUError
@@ -51,6 +100,10 @@ def main():
 
 
 def _run(args, parser):
+
+    if args.command == "status":
+        cmd_status(host=args.host, port=args.port, as_json=args.json)
+        return
 
     if args.command == "route":
         decision = SmartRouter.route(

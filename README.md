@@ -1,161 +1,114 @@
-<div align="center">
-  <img src="assets/banner.png" alt="POD Smart Router — Sovereign Architecture Banner" width="100%" />
-</div>
+<p align="center">
+  <img src="assets/banner.png" alt="POD Smart Router: Autonomous Print-on-Demand order routing engine across Printify and Gelato" width="100%" />
+</p>
 
-<br />
+# POD Smart Router
 
-<div align="center">
-  <a href="https://zoth.nullai.tech/tools/pod-smart-router"><img src="https://img.shields.io/badge/Zoth_Studio_v2-Workspace-D4AF37?style=for-the-badge&logo=sparkles&logoColor=black" alt="Zoth Studio Workspace" /></a>
-  <a href="http://127.0.0.1:8117"><img src="https://img.shields.io/badge/ZothOS_v3.3-Port_:8117-38BDF8?style=for-the-badge&logo=linux&logoColor=black" alt="Port :8117" /></a>
-  <a href="https://nullai.tech"><img src="https://img.shields.io/badge/Security-100%25_Zero--Egress-10B981?style=for-the-badge&logo=shield&logoColor=black" alt="Zero Egress" /></a>
-  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X"><img src="https://img.shields.io/badge/☕_Buy_Us_a_Coffee-Stripe-D4AF37?style=for-the-badge" alt="Buy Us a Coffee" /></a>
-</div>
+Zero-dependency Python 3.10+ order routing engine and domestic cost optimizer for print-on-demand sellers: automated carrier and production partner routing (Printify vs. Gelato), multi-currency landed cost optimization, customs tariff avoidance, production API dispatch payload generation, loopback HTTP workstation, and a 4-tool MCP stdio server.
 
-# ⚡ POD Smart Router (v2.5.0)
+- Zoth Studio v2 dossier: https://zoth.nullai.tech/tools/pod-smart-router
+- Local workstation: `http://127.0.0.1:8117`
+- Runtime dependencies: none (Python standard library only)
+- License: MIT
 
-> **Autonomous multi-channel Print-on-Demand order router dynamically evaluating Printify (:8115) vs Gelato (:8116) on landed cost, domestic proximity, delivery speed, and tariff avoidance.**
+## What It Does
 
----
+- **Multi-partner routing**: Dynamically evaluates wholesale pricing, regional manufacturing hubs, shipping lead times, and customs borders across Printify and Gelato to pick the optimal supplier.
+- **Rule-based decision policies**:
+  - `balanced`: Blends landed wholesale cost, shipping speed, and customs avoidance.
+  - `cheapest`: Prioritizes lowest absolute landed wholesale plus carrier cost.
+  - `fastest`: Prioritizes shortest delivery window.
+  - `domestic_only`: Enforces domestic fulfillment inside the recipient's country.
+  - `customs_avoidance`: Avoids cross-border customs declarations and tariffs.
+- **Catalog benchmark matrix**: Side-by-side pricing, domestic hub counts, and lead times across 10 benchmark apparel, drinkware, and home decor products.
+- **Dispatch payload generator**: Compiles verified production API request JSON for Printify v1 orders and Gelato v2 orders.
+- **Environmental savings**: Quantifies estimated ground versus air transit miles saved by domestic fulfillment.
 
-## 🏛️ Architectural Overview
+## How It Works
 
-**POD Smart Router** is a core commercial sovereignty engine in the **[Zoth Studio v2](https://zoth.nullai.tech)** arsenal and **[ZothOS Linux 3.3](https://zothos.nullai.tech)** ecosystem, engineered by **1nc0gn30 • NullAI ([@1nc0gn30](https://github.com/1nc0gn30))**.
-
-| Property | Specification |
-| :--- | :--- |
-| **Tool ID** | `pod-smart-router` |
-| **Category** | `Commerce & MCP` |
-| **Local Port** | `http://127.0.0.1:8117` |
-| **Execution Mode** | Native Python Daemon & Browser Client |
-| **Zoth Studio Route** | `http://127.0.0.1:3000/tools/pod-smart-router` |
-| **License** | 100% Free & Open Access (Zero Paywalls) |
-
----
-
-## 💎 What It Does & How It Works
-
-- **Dynamic Cross-Provider Optimization**: Analyzes order SKUs against the combined catalog matrices of Printify and Gelato to identify lowest wholesale cost, fastest transit time, and zero-duty local fulfillment hubs across 32 countries.
-- **Rules-Based Routing Engine**:
-  - `cheapest`: Maximum margin via lowest landed cost (base cost + shipping + tariffs).
-  - `fastest`: Minimizes customer delivery days using proximate domestic labs.
-  - `balanced`: Default sovereign heuristic guaranteeing domestic fulfillment and zero customer import tariffs.
-  - `domestic_only`: Enforces domestic fulfillment within the customer's country.
-  - `customs_avoidance`: Rejects cross-border dispatches that incur import VAT or clearance delays.
-- **Production API Dispatch Payloads**: Emits ready-to-transmit JSON payloads for Printify Order API and Gelato Order API with address normalization.
-- **Zero-Egress Sovereign Privacy**: Operates entirely on loopback (`127.0.0.1:8117`) without sending private customer addresses or billing telemetry to third-party tracking services.
-
----
-
-## 🚀 Quick Start
-
-```bash
-# Clone and launch the standalone daemon on port 8117
-git clone https://github.com/1nc0gn30/pod-smart-router.git
-cd pod-smart-router
-python3 server.py --port 8117
-
-# In another terminal, query the API or CLI
-curl -s http://127.0.0.1:8117/health
-curl -s http://127.0.0.1:8117/api/catalog/matrix
+```text
+src/pod_smart_router/
+├── catalog_matrix.py   # Benchmark product specs and regional hub availability
+├── router.py           # Core routing decision engine and scoring algorithms
+├── payload_gen.py      # Production API dispatch payload generators (Printify & Gelato)
+├── partner_client.py   # Partner API client abstraction
+├── mcp_server.py       # MCP stdio server (JSON-RPC 2.0: initialize, tools/list, tools/call)
+├── server.py           # Loopback HTTP API + static workstation from public/
+└── cli.py              # `pod-smart-router` entry point
+bin/pod-smart-router         # Runs the CLI from checkout
+public/                      # Browser workstation (routing playground and dispatch preview)
 ```
 
----
+The HTTP server only accepts browser requests from `localhost` / `127.0.0.1` / `[::1]` origins and binds to `127.0.0.1` by default.
 
-## 💻 ZothOS CLI & MCP Commands
-
-The sovereign binary `pod-smart-router` is pre-installed in `/usr/local/bin` and `~/.local/bin`:
+## Install
 
 ```bash
-# Check status and version
-pod-smart-router --version
-pod-smart-router --status
+git clone https://github.com/1nc0gn30/pod-smart-router.git
+cd pod-smart-router
+pip install -e .
+```
+
+Or run directly without installation via the runner script:
+
+```bash
+./bin/pod-smart-router --help
+```
+
+## Configuration
+
+The core routing engine and catalog benchmarks run completely offline with no API keys or environment variables required.
+
+Optional environment variables:
+- `POD_ROUTER_PORT`: Custom listening port for the HTTP daemon (default: `8117`).
+- `ZOTH_BIND_HOST`: Custom bind interface (default: `127.0.0.1`).
+- `PRINTIFY_API_TOKEN`: Printify API token for live shop queries.
+- `GELATO_API_KEY`: Gelato API key for live order submission.
+
+## CLI reference
+
+```bash
+# Check service status and routing rules
+pod-smart-router status
 pod-smart-router --json
 
-# Calculate optimal routing decision
-pod-smart-router route --sku gildan_18000 --country US --qty 2 --rule balanced
-pod-smart-router route --sku bella_canvas_3001 --country GB --rule fastest --json
+# Calculate optimal route for a Gildan 18000 sweatshirt shipped to the UK
+pod-smart-router route --sku gildan_18000 --country GB --rule balanced
 
-# Inspect cross-provider catalog matrix
+# View side-by-side catalog matrix across Printify and Gelato
 pod-smart-router matrix
-pod-smart-router matrix --json
 
 # Generate production API dispatch payload
-pod-smart-router dispatch --sku comfort_colors_1717 --country DE --artwork "https://example.com/art.png"
+pod-smart-router dispatch --sku gildan_18000 --country GB
 
-# Launch local HTTP daemon
+# Launch local HTTP workstation
 pod-smart-router server --port 8117
 ```
 
----
+## MCP/REST reference
 
-## ☕ 100% Free & Open-Access Support Architecture
+### MCP stdio tools
 
-Every tool engineered by 1nc0gn30 • NullAI is **100% free, open, and unlocked by default**. There are zero paywalls, zero license locks, and zero feature gates.
+When registered in an MCP host (such as Antigravity or Claude Desktop):
+- `route_order`: Calculates optimal fulfillment partner, landed costs, savings, and delivery estimate.
+- `get_catalog_matrix`: Returns side-by-side product pricing and regional hub availability.
+- `generate_dispatch_payload`: Constructs production-ready Printify or Gelato API request bodies.
+- `evaluate_destination_hubs`: Analyzes local manufacturing presence for a given destination country code.
 
-If this tool empowers your business or automates your print fleet, consider supporting development:
+### REST endpoints
 
-- **☕ Buy Us a Coffee (Stripe)**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+- `GET /health` - Service health and partner availability status.
+- `GET /api/catalog/matrix` - Benchmark product catalog.
+- `GET /api/destinations` - Supported destination country codes.
+- `GET /api/rules` - Supported decision policies.
+- `POST /api/route` - Order routing request JSON payload.
+- `POST /api/dispatch` - Production dispatch JSON generator.
 
----
+## Port
 
-<div align="center">
-  <sub>Engineered by <b>1nc0gn30 • NullAI</b> (<a href="https://github.com/1nc0gn30">@1nc0gn30</a>) &bull; <a href="https://nullai.tech">NullAI Platform</a> &bull; <a href="https://zoth.nullai.tech">Zoth Studio v2</a></sub>
-</div>
+Default HTTP port: `8117`.
 
----
+## License
 
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
-
-```mermaid
-flowchart LR
-    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
-        CLI["pod-smart-router --help / --json"]
-        TUI["pod-smart-router-tui<br/>Unicode U+2800 2x4 Braille"]
-    end
-
-    subgraph Workstation["⚡ Sovereign Workstation"]
-        WEB["http://127.0.0.1:8117<br/>REST API & /health"]
-    end
-
-    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
-        GODMODE["http://127.0.0.1:3000/tools/pod-smart-router<br/>God-Mode Workstation"]
-        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
-    end
-
-    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
-        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
-        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
-        NOTE["Studio/Tools/Studio pod-smart-router.md"]
-    end
-
-    CLI --> WEB
-    TUI --> WEB
-    WEB <--> GODMODE
-    WEB <--> LITE
-    WEB --> TRACKER
-    TRACKER <--> NOTE
-    NOTE <--> NEURO
-```
-
-### Cross-Surface Integration Matrix
-
-| Surface | Endpoint / Binary | Capabilities |
-| :--- | :--- | :--- |
-| **Standalone Workstation** | `http://127.0.0.1:8117` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/pod-smart-router` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `pod-smart-router` / `pod-smart-router-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio pod-smart-router.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
-
-```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
-pod-smart-router --help
-pod-smart-router-tui --status
-pod-smart-router-tui --json
-
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
-```
-
+MIT License. Engineered by [1nc0gn30](https://1nc0gn30.si) • [NullAI Platform](https://nullai.tech). 100% Free and Open-Source.
+Optional tip link: [Buy Us a Coffee](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).

@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "1nc0gn30", email = "neal@nullai.tech" }
+    { name = "1nc0gn30", email = "contact@nullai.tech" }
 ]
 keywords = ["pod", "print-on-demand", "router", "printify", "gelato", "etsy", "shopify", "mcp"]
 
