@@ -97,14 +97,6 @@
   transform: scale(0.95);
 }
 
-#btn-open-license-modal {
-  transition: color 140ms ease;
-}
-
-#btn-open-license-modal:hover {
-  color: var(--gold-glow, #FFDF70) !important;
-}
-
 .faq-card {
   transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
               background-color 160ms ease,
@@ -161,12 +153,6 @@
   outline: 2px solid var(--gold-base, #D4AF37);
   outline-offset: 2px;
   border-radius: 4px;
-}
-
-#btn-open-license-modal:focus-visible {
-  outline: 2px solid var(--gold-base, #D4AF37);
-  outline-offset: 3px;
-  border-radius: 2px;
 }
 
 .footer-links a:focus-visible,
@@ -235,7 +221,6 @@
   .toggle-slider,
   .modal-close,
   .faq-card,
-  #btn-open-license-modal,
   .footer-links a {
     transition: none !important;
     transform: none !important;

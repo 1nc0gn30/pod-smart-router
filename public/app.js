@@ -221,13 +221,13 @@
   window.copySolanaAddress = copySolanaAddress;
 
   function checkLicense() {
-    const proBadge = document.getElementById("licenseBadge") || document.getElementById("pro-badge");
-    if (proBadge) {
-      proBadge.className = "brand-badge badge-pro";
-      proBadge.textContent = "✦ 100% UNLOCKED";
-      proBadge.style.background = "rgba(16, 185, 129, 0.2)";
-      proBadge.style.color = "var(--emerald, #10B981)";
-      proBadge.style.borderColor = "var(--emerald, #10B981)";
+    const statusBadge = document.getElementById("licenseBadge");
+    if (statusBadge) {
+      statusBadge.className = "brand-badge badge-open";
+      statusBadge.textContent = "✦ 100% OPEN ACCESS";
+      statusBadge.style.background = "rgba(16, 185, 129, 0.2)";
+      statusBadge.style.color = "var(--emerald, #10B981)";
+      statusBadge.style.borderColor = "var(--emerald, #10B981)";
     }
   }
 
