@@ -77,6 +77,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .brand-group {
@@ -238,6 +240,8 @@ html, body {
 /* Hero Section with Canvas */
 .hero-section {
   position: relative;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
   background: var(--bg-surface);
@@ -248,7 +252,7 @@ html, body {
 
 .hero-canvas-container {
   width: 100%;
-  height: 320px;
+  height: 220px;
   position: relative;
 }
 
@@ -259,10 +263,10 @@ html, body {
 }
 
 .hero-overlay-content {
-  position: absolute;
-  top: 24px;
-  left: 28px;
-  max-width: 500px;
+  order: -1;
+  position: relative;
+  max-width: 680px;
+  padding: 24px 28px 4px;
   pointer-events: none;
 }
 
@@ -889,8 +893,11 @@ body.licensed .code-unlocked {
   .banner-title {
     font-size: 1.25rem;
   }
+  .hero-overlay-content {
+    padding: 18px 18px 4px;
+  }
   .hero-canvas-container {
-    height: 240px;
+    height: 170px;
   }
   .hero-headline {
     font-size: 1.4rem;
